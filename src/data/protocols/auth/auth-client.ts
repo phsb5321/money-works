@@ -3,14 +3,41 @@ export type AuthRequest = {
   password: string
 }
 
-export interface AuthClient {
-  signIn: (params: AuthRequest) => Promise<AuthResponse>
-  signUp: (params: AuthRequest) => Promise<AuthResponse>
+export type SignUpRequest = {
+  email: string
+  password: string
+  passwordConfirm: string
 }
 
+export interface AuthClient {
+  signIn: (params: AuthRequest) => Promise<AuthResponse | AuthError>
+  signUp: (params: SignUpRequest) => Promise<AuthResponse>
+}
 
-// TODO: Find a way to import this type from supabase-js
-export type AuthResponse = any
+// TODO: FIND A BETTER SOLUTION FOR { [key: string]: any }
+export type AuthResponse = {
+  token: string,
+  record: {
+    [key: string]: any
+  }
+}
+
+// TODO: FIND A BETTER SOLUTION FOR { [key: string]: any }
+export type AuthError = {
+  data: {
+    code: number,
+    data: {
+      [key: string]: any
+    },
+    message: string,
+  },
+  isAbort: boolean,
+  originalError: string,
+  status: number,
+  toJSON: string,
+  url: string,
+}
+
 
 export enum AuthStatusCode {
   ok = 200,

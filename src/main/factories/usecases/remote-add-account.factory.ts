@@ -1,14 +1,8 @@
 import { RemoteAddAccount } from '@/data/usecases';
 import { AddAccountUsecase } from '@/domain/usecases';
-import { SupabaseAuthClient } from '@/infra/supabase';
-import { LocalStorageClient } from '@/infra/cache';
+import { PocketBaseAuthClient } from '@/infra/pocketbase';
 
 export const makeRemoteAddAccount = (): AddAccountUsecase => {
-  const authClient = new SupabaseAuthClient()
-  const storageClient = new LocalStorageClient()
-
-  return new RemoteAddAccount(
-    authClient,
-    storageClient
-  )
+  const authClient = new PocketBaseAuthClient()
+  return new RemoteAddAccount(authClient)
 }

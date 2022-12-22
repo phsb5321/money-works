@@ -1,3 +1,3 @@
 export * from './singUp.factory'
-export * from './logIn.factory'
+export * from './signIn.factory'
 export * from './home.factory'

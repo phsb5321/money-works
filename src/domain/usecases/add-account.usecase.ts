@@ -8,7 +8,8 @@ export namespace AddAccountUsecase {
   export type Params = {
     email: string
     password: string
+    passwordConfirm: string
   }
 
-  export type Model = any
+  export type Model = void
 }

@@ -1,6 +1,12 @@
 
 export interface QueryClient<R = any> {
-  request: () => Promise<QueryResponse<R>>
+  listPaginated: (
+    query: QueryInterface,
+  ) => Promise<QueryResponse<R>>
+}
+
+export type QueryInterface = {
+  collection: string
 }
 
 export type QueryMethod = 'select' | 'insert' | 'update' | 'delete'

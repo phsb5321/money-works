@@ -1,9 +1,9 @@
 import { makeLocalGetAuthTokenUsecase, makeRemoteAuthentication } from '@/main/factories/usecases';
-import { LogIn } from '@/presentation/pages';
+import { SignIn } from '@/presentation/pages';
 
-export const makeLogIn = () => {
+export const makeSignIn = () => {
   return (
-    <LogIn
+    <SignIn
       getAuthToken={makeLocalGetAuthTokenUsecase()}
       authentication={makeRemoteAuthentication()}
     />

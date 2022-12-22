@@ -1,11 +1,14 @@
-import { makeHome } from './../factories/pages/home.factory';
 import { createBrowserRouter } from 'react-router-dom';
+import { makeHome } from './../factories/pages/home.factory';
 
-import { makeSignUp, makeLogIn } from '@/main/factories/pages';
+import { makeSignIn, makeSignUp } from '@/main/factories/pages';
+import { makeLocalGetAuthTokenUsecase } from '../factories/usecases';
+
+const userHasToken = await makeLocalGetAuthTokenUsecase().get();
 
 export const router = createBrowserRouter([
-  { path: "/sign-up", element: makeSignUp() },
-  { path: "/log-in", element: makeLogIn() },
+  ...(!userHasToken ? [{ path: "/signup", element: makeSignUp() }] : []),
+  ...(!userHasToken ? [{ path: "/signin", element: makeSignIn() }] : []),
   { path: "/", element: makeHome() },
 ]);
 

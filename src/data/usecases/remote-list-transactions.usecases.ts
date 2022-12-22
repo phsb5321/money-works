@@ -7,10 +7,11 @@ export class RemoteListTransactionsUseCase implements ListTransactionsUsecases {
     private readonly queryClient: QueryClient<TransactionModel>
   ) { }
 
-  async list(
+  async execute(
     params: ListTransactionsUsecases.Params
   ): Promise<TransactionModel[]> {
-    const { body } = await this.queryClient.request()
+    const { body } = await this.queryClient.listPaginated(params)
+    if (!body) return []
     return body as TransactionModel[]
   }
 }

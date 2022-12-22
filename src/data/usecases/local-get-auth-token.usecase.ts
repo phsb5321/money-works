@@ -7,6 +7,6 @@ export class LocalGetAuthToken implements GetAuthTokenUsecase {
   ) { }
 
   async get(): Promise<GetAuthTokenUsecase.Model> {
-    return this.storageClient.get('auth-token');
+    return this.storageClient.get('pocketbase_auth');
   }
 }

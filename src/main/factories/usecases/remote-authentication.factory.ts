@@ -1,10 +1,10 @@
 import { RemoteAuthentication } from "@/data/usecases/remote-authentication.usecase";
 import { AuthenticationUsecase } from "@/domain/usecases";
-import { SupabaseAuthClient } from "@/infra/supabase";
+import { PocketBaseAuthClient } from "@/infra/pocketbase";
 import { LocalStorageClient } from "@/infra/cache";
 
 export const makeRemoteAuthentication = (): AuthenticationUsecase => {
-  const authClient = new SupabaseAuthClient()
+  const authClient = new PocketBaseAuthClient()
   const storageClient = new LocalStorageClient()
 
   return new RemoteAuthentication(

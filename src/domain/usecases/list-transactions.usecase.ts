@@ -1,10 +1,11 @@
+import { QueryInterface } from '@/data/protocols/query';
 import { TransactionModel } from '@/domain/models/';
 
 export interface ListTransactionsUsecases {
-  list: (params: ListTransactionsUsecases.Params) => Promise<ListTransactionsUsecases.Model>;
+  execute: (params: ListTransactionsUsecases.Params) => Promise<ListTransactionsUsecases.Model>;
 }
 
 export namespace ListTransactionsUsecases {
-  export type Params = {};
+  export type Params = QueryInterface;
   export type Model = TransactionModel[];
 }
