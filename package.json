@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -23,7 +25,7 @@
     "@mantine/prism": "^5.9.2",
     "@mantine/spotlight": "^5.9.2",
     "@mantine/tiptap": "^5.9.2",
-    "@supabase/supabase-js": "^2.1.2",
+    "@ngneat/falso": "^6.3.2",
     "@tabler/icons": "^1.115.0",
     "@tiptap/extension-link": "^2.0.0-beta.205",
     "@tiptap/react": "^2.0.0-beta.205",
@@ -31,16 +33,20 @@
     "axios": "^1.2.1",
     "dayjs": "^1.11.7",
     "embla-carousel-react": "^7.0.5",
+    "pocketbase": "^0.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.4"
+    "react-router-dom": "^6.4.4",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@types/node": "^18.11.11",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@vitejs/plugin-react": "^2.2.0",
+    "@vitest/coverage-c8": "^0.26.2",
     "typescript": "^4.6.4",
-    "vite": "^3.2.3"
+    "vite": "^3.2.3",
+    "vitest": "^0.26.2"
   }
 }
