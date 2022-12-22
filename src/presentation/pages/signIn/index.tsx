@@ -12,16 +12,16 @@ import { IconX } from '@tabler/icons';
 
 import { useStyles } from './style';
 
-export interface LogInProps {
+export interface SignInProps {
   authentication: AuthenticationUsecase;
   getAuthToken: GetAuthTokenUsecase;
 }
 
 
-export function LogIn({
+export function SignIn({
   authentication,
   getAuthToken,
-}: LogInProps) {
+}: SignInProps) {
   const { classes } = useStyles();
   const { classes: mainClasses } = mainTheme();
 
@@ -36,7 +36,10 @@ export function LogIn({
     },
   });
 
-  const handleSubmit = async (email: string, password: string) => {
+  const handleSubmit = async (
+    email: string,
+    password: string
+  ) => {
     try {
       await authentication.auth({ email, password })
       navigate('/')
@@ -71,7 +74,7 @@ export function LogIn({
 
       <Paper className={classes.form} radius={0} p={30}>
         <Title order={2} className={classes.title} align="center" mb={50} >
-          Log In
+          Sign In
         </Title>
 
         <form onSubmit={
