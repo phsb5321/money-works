@@ -49,8 +49,8 @@ export function SignUp({
         setErrorMessage('Password does not match')
         return
       }
-      await addAccount.add({ email, password })
-      navigate('/')
+      await addAccount.add({ email, password, passwordConfirm })
+      navigate('/signin')
     } catch (error: any) {
       setErrorMessage(error.message)
     }
