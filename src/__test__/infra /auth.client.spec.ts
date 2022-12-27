@@ -5,28 +5,30 @@ import { AuthClient, AuthError, AuthResponse } from '@/data/protocols/auth'
 describe('AuthClient', () => {
   let authClient: AuthClient
 
-  beforeEach(() => { authClient = new PocketBaseAuthClient() })
+  beforeEach(() => {
+    authClient = new PocketBaseAuthClient()
+  })
 
   it('Given existing parameters should return truthy', async () => {
-    const sut = new PocketBaseAuthClient()
+    const sut = authClient
     const response = await sut.signIn({
       email: 'teste@email.com',
-      password: '123!@#qweQWE'
+      password: '12345678'
     })
     expect(response).toBeTruthy()
   })
 
   it('Given existing parameters should return AuthResponse', async () => {
-    const sut = new PocketBaseAuthClient()
+    const sut = authClient
     const response = await sut.signIn({
       email: 'teste@email.com',
-      password: '123!@#qweQWE'
+      password: '12345678'
     })
     expectTypeOf(response).toEqualTypeOf<AuthResponse>
   })
 
   it('Given non-existing parameters should return some error', async () => {
-    const sut = new PocketBaseAuthClient()
+    const sut = authClient
     const fakeUser = {
       email: randEmail(),
       password: randPassword()
@@ -36,13 +38,38 @@ describe('AuthClient', () => {
   })
 
   it('Given non-existing parameters should return AuthError', async () => {
-    const sut = new PocketBaseAuthClient()
+    const sut = authClient
     const fakeUser = {
       email: randEmail(),
       password: randPassword()
     }
     try { await sut.signIn(fakeUser) }
     catch (error) { expectTypeOf(error).toEqualTypeOf<AuthError> }
+  })
+
+  it('Given non-existing parameters should return AuthError with message', async () => {
+    const sut = authClient
+    const fakeUser = {
+      email: randEmail(),
+      password: randPassword()
+    }
+    try { await sut.signIn(fakeUser) }
+    // @ts-ignore
+    catch (error) { expect(error.message).toBeTruthy() }
+  })
+
+  it('Given non-existing parameters should return AuthError with code', async () => {
+    const sut = authClient
+    const fakeUser = {
+      email: randEmail(),
+      password: randPassword()
+    }
+    try { await sut.signIn(fakeUser) }
+    catch (error) {
+      console.log("🚀 ~ file: auth.client.spec.ts:68 ~ it ~ error", error)
+      // @ts-ignore
+      expect(error.code).toBeTruthy()
+    }
   })
 
 })
