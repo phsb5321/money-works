@@ -17,7 +17,8 @@ export function Home({
 
   const classes = useStyles();
   const [active, setActive] = useState('home');
-  const [transactionList, setTransactionList] = useState<TransactionModel[]>([]); // TODO: Rename states to be more descriptive
+  // TODO: Rename states to be more descriptive
+  const [transactionList, setTransactionList] = useState<TransactionModel[]>([]);
   const [loading, setLoading] = useState(false);
 
   const handleActive = (value: string) => {
@@ -26,10 +27,8 @@ export function Home({
 
   const handleListTransactions = async () => {
     setLoading(true);
-    const response = await listTransactions.execute({
-      collection: 'transactions',
-    });
-    setTransactionList(response);
+    const { items } = await listTransactions.execute({});
+    setTransactionList(items);
     setLoading(false);
   };
 
@@ -54,6 +53,7 @@ export function Home({
           <DisplayTable
             data={transactionList}
             loading={loading}
+            columns={['id', 'description', 'amount', 'created']}
           />
         </Center>
       </Grid.Col>

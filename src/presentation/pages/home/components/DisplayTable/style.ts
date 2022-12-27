@@ -6,4 +6,9 @@ export const useStyles = createStyles((theme) => ({
       borderLeft: `3px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white}`,
     },
   },
+
+  scrollArea: {
+    overflow: 'auto',
+  }
+
 }));

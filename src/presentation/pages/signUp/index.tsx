@@ -67,7 +67,6 @@ export function SignUp({
       passwordConfirm: (value, values) => { return value !== values.password && 'Password does not match' },
       password: (value) => {
         const { score, message } = getPasswordStrength({ password: value })
-        console.log(score, message)
         setPaswordStrength({ score, message })
         return score <= 60
       },

@@ -2,6 +2,7 @@ import { createStyles } from '@mantine/core';
 export const useStyles = createStyles((theme) => ({
   wrapper: {
     display: 'flex',
+    zIndex: 1,
   },
 
   aside: {
