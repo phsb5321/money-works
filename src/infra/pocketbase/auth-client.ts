@@ -1,6 +1,16 @@
-import { AuthClient, AuthError, AuthRequest, AuthResponse, SignUpRequest } from '@/data/protocols/auth'
+import {
+  AuthClient,
+  AuthError,
+  AuthRequest,
+  AuthResponse,
+  SignUpRequest
+} from '@/data/protocols/auth';
 import { EmailInUseError } from '@/domain/errors';
-import PocketBase, { Record, RecordAuthResponse } from 'pocketbase';
+
+import PocketBase, {
+  Record,
+  RecordAuthResponse
+} from 'pocketbase';
 
 export class PocketBaseAuthClient implements AuthClient {
   private readonly pocketBase: PocketBase
@@ -35,6 +45,11 @@ export class PocketBaseAuthClient implements AuthClient {
       })
 
     return response
+  }
+
+
+  async signOut(): Promise<void> {
+    return await this.pocketBase.authStore.clear()
   }
 
 }

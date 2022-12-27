@@ -1,5 +1,3 @@
-import { AccountModel } from '@/domain/models';
-
 export interface AddAccountUsecase {
   add(params: AddAccountUsecase.Params): Promise<AddAccountUsecase.Model>
 }
@@ -11,5 +9,5 @@ export namespace AddAccountUsecase {
     passwordConfirm: string
   }
 
-  export type Model = void
+  export type Model = any // TODO: define model
 }

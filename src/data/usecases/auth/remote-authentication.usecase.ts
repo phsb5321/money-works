@@ -10,17 +10,17 @@ export class RemoteAuthentication implements AuthenticationUsecase {
 
   async auth(params: AuthenticationUsecase.Params): Promise<AuthenticationUsecase.Model> {
     const authResponse = await this.authClient.signIn(params)
-
-    if (authResponse) {
+    const hasToken = Object.keys(authResponse).includes('token')
+    if (hasToken) {
+      const token = authResponse['token' as keyof typeof authResponse]
       await this.storageClient.set({
         key: 'accessToken',
-        value: authResponse.accessToken
+        value: token
       })
+      return { accessToken: token }
     }
 
-    return {
-      accessToken: authResponse.accessToken,
-    }
+
   }
 }
 

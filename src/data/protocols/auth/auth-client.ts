@@ -12,6 +12,7 @@ export type SignUpRequest = {
 export interface AuthClient {
   signIn: (params: AuthRequest) => Promise<AuthResponse | AuthError>
   signUp: (params: SignUpRequest) => Promise<AuthResponse>
+  signOut: () => Promise<void>
 }
 
 // TODO: FIND A BETTER SOLUTION FOR { [key: string]: any }

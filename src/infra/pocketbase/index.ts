@@ -1,2 +1,2 @@
-export * from './pocketbase-auth-client'
-export * from './pocketbase-query-client'
+export * from './auth-client'
+export * from './generic-repository'

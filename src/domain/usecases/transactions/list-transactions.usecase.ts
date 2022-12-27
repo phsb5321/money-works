@@ -1,4 +1,4 @@
-import { QueryInterface } from '@/data/protocols/query';
+import { RepositoryGetInterface } from '@/data/protocols/query';
 import { TransactionModel } from '@/domain/models/';
 
 export interface ListTransactionsUsecases {
@@ -6,6 +6,6 @@ export interface ListTransactionsUsecases {
 }
 
 export namespace ListTransactionsUsecases {
-  export type Params = QueryInterface;
-  export type Model = TransactionModel[];
+  export type Params = RepositoryGetInterface;
+  export type Model = any // TODO: TransactionModel[];
 }

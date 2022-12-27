@@ -1,2 +1,2 @@
-export * from './user-account.model'
+export * from './user.model'
 export * from './transaction.model'

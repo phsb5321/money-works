@@ -8,16 +8,11 @@ export class RemoteAddAccount implements AddAccountUsecase {
 
   async add(params: AddAccountUsecase.Params): Promise<AddAccountUsecase.Model> {
     const { email, password, passwordConfirm } = params
-    const authResponse = await this.authClient.signUp({
+    return await this.authClient.signUp({
       email,
       password,
       passwordConfirm
     })
-
-    // TODO: Handle errors from PocketBase
-    if (authResponse.error) {
-      throw new Error(authResponse.error)
-    }
   }
 }
 

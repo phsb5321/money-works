@@ -1,5 +1,5 @@
 import { StorageClient } from '@/data/protocols/cache';
-import { GetAuthTokenUsecase } from '@/domain/usecases/get-auth-token.usecase';
+import { GetAuthTokenUsecase } from '@/domain/usecases';
 
 export class LocalGetAuthToken implements GetAuthTokenUsecase {
   constructor(
