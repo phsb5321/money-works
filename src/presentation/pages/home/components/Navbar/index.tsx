@@ -27,16 +27,44 @@ const linksMockdata: { [key: string]: string[]; } = {
   Account: ['Profile', 'Notifications', 'Logout'],
 }
 
-export function HomeNavbar() {
-  const { classes, cx } = useStyles();
-  const [active, setActive] = useState('Home');
-  const [activeLink, setActiveLink] = useState('Settings');
+export enum NavbarActive {
+  Home = 'Home',
+  Account = 'Account',
+}
 
+export type NavbarActiveType = keyof typeof NavbarActive;
+
+export enum NavbarActiveLink {
+  Overview = 'Overview',
+  Projects = 'Projects',
+  Team = 'Team',
+  Calendar = 'Calendar',
+  Profile = 'Profile',
+  Notifications = 'Notifications',
+  Logout = 'Logout',
+}
+
+export type NavbarActiveLinkType = keyof typeof NavbarActiveLink;
+
+interface HomeNavbarProps {
+  active: NavbarActiveType;
+  activeLink: NavbarActiveLinkType;
+  setActive: (value: NavbarActiveType) => void;
+  setActiveLink: (value: NavbarActiveLinkType) => void;
+}
+
+export function HomeNavbar({
+  active,
+  activeLink,
+  setActive,
+  setActiveLink,
+}: HomeNavbarProps) {
+  const { classes, cx } = useStyles();
   const mainLinks = mainLinksMockdata.map((link) => (
     <Tooltip label={link.label} position="right" withArrow transitionDuration={0} key={link.label}>
       <UnstyledButton
         onClick={() => {
-          setActive(link.label)
+          setActive(link.label as NavbarActiveType);
         }}
         className={cx(classes.mainLink, { [classes.mainLinkActive]: link.label === active })}
       >
@@ -51,7 +79,7 @@ export function HomeNavbar() {
       href="/"
       onClick={(event) => {
         event.preventDefault();
-        setActiveLink(link);
+        setActiveLink(link as NavbarActiveLinkType);
       }}
       key={link}
     >

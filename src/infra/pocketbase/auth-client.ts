@@ -16,7 +16,7 @@ export class PocketBaseAuthClient implements AuthClient {
   private readonly pocketBase: PocketBase
   constructor() {
     this.pocketBase = new PocketBase(
-      process.env.VITE_BASE_URL,
+      import.meta.env.VITE_POCKETBASE_API_KEY,
     )
   }
 
@@ -49,7 +49,7 @@ export class PocketBaseAuthClient implements AuthClient {
 
 
   async signOut(): Promise<void> {
-    return await this.pocketBase.authStore.clear()
+    return this.pocketBase.authStore.clear()
   }
 
 }

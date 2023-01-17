@@ -1,9 +1,9 @@
 import { makeLocalGetAuthTokenUsecase, makeRemoteAddAccount } from '@/main/factories/usecases';
-import { SignUp } from '@/presentation/pages';
+import { SignUpPage } from '@/presentation/pages';
 
-export const makeSignUp = () => {
+export const makeSignUp: () => JSX.Element = () => {
   return (
-    <SignUp
+    <SignUpPage
       getAuthToken={makeLocalGetAuthTokenUsecase()}
       addAccount={makeRemoteAddAccount()}
     />

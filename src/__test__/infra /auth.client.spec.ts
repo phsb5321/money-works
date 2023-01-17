@@ -1,5 +1,5 @@
 import { randEmail, randPassword } from '@ngneat/falso';
-import { describe, it, beforeEach, expect, expectTypeOf } from 'vitest'
+import { describe, it, beforeEach, expect, expectTypeOf, afterEach, vi } from 'vitest'
 import { PocketBaseAuthClient } from '@/infra/pocketbase'
 import { AuthClient, AuthError, AuthResponse } from '@/data/protocols/auth'
 describe('AuthClient', () => {
@@ -9,12 +9,20 @@ describe('AuthClient', () => {
     authClient = new PocketBaseAuthClient()
   })
 
+  afterEach(() => {
+    authClient.signOut()
+  })
+
   it('Given existing parameters should return truthy', async () => {
     const sut = authClient
     const response = await sut.signIn({
       email: 'teste@email.com',
       password: '12345678'
     })
+    const spy = vi.spyOn(sut, 'signIn')
+    console.log("🚀 ~ file: auth.client.spec.ts:23 ~ it ~ spy", spy)
+    expect(spy).toHaveBeenCalled()
+
     expect(response).toBeTruthy()
   })
 
@@ -65,10 +73,10 @@ describe('AuthClient', () => {
       password: randPassword()
     }
     try { await sut.signIn(fakeUser) }
-    catch (error) {
-      console.log("🚀 ~ file: auth.client.spec.ts:68 ~ it ~ error", error)
+    catch ({ data }) {
+      console.log("🚀 ~ file: auth.client.spec.ts:73 ~ it ~ data", data)
       // @ts-ignore
-      expect(error.code).toBeTruthy()
+      expect(data.code).toBeTruthy()
     }
   })
 

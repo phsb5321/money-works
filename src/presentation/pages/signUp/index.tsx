@@ -5,7 +5,16 @@ import { AddAccountUsecase, GetAuthTokenUsecase } from '@/domain/usecases';
 import { mainTheme } from '@/presentation/pages/shared';
 import { getPasswordStrength } from '@/presentation/validations';
 import {
-  Button, Checkbox, Notification, Paper, PasswordInput, Progress, Text, TextInput, Title
+  Button,
+  Checkbox,
+  MantineProvider,
+  Notification,
+  Paper,
+  PasswordInput,
+  Progress,
+  Text,
+  TextInput,
+  Title
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useInputState } from '@mantine/hooks';
@@ -18,10 +27,10 @@ export interface SignUpProps {
   getAuthToken: GetAuthTokenUsecase
 }
 
-export function SignUp({
+export function SignUpPage({
   addAccount,
   getAuthToken,
-}: SignUpProps) {
+}: SignUpProps): JSX.Element {
   const { classes } = useStyles();
   const { classes: mainClasses } = mainTheme();
 
@@ -79,7 +88,10 @@ export function SignUp({
 
 
   return (
-    <div className={mainClasses.wrapper}>
+    <div
+      className={mainClasses.wrapper}
+      data-testid="signup-page"
+    >
 
       {errorMessage && (
         <Notification
@@ -95,19 +107,27 @@ export function SignUp({
 
       <Paper className={classes.form} radius={0} p={30}>
 
-        <Title order={2} className={classes.title} align="center" mb={50} >
-          Sing up
+        <Title
+          order={2}
+          align="center" mb={50}
+          className={classes.title}
+          data-testid="signup-title"
+        >
+          Sing Up
         </Title>
 
         <form onSubmit={
           form.onSubmit((values) => {
             return handleSubmit(values.email, values.password, values.passwordConfirm)
-          })
-        }>
+          })}
+
+          data-testid="signup-form"
+        >
 
           <TextInput
             {...form.getInputProps('email')}
             placeholder="Enter your email"
+            data-testid="signup-email-input"
             error={form.errors.email}
             label="Email"
             required
@@ -150,10 +170,6 @@ export function SignUp({
             placeholder="Confirm your password"
             label="Confirm password"
             {...form.getInputProps('passwordConfirm')}
-          />
-
-          <Checkbox
-            label="I agree to the terms and conditions"
           />
 
           <Button variant="light" type="submit" color="blue" fullWidth>
